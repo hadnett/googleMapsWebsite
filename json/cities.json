@@ -5,12 +5,5 @@
         "content": "Sapporo is the largest city in the northernmost main island of Hokkaido, with a population of 1.9 million.The city is a popular destination for Japanese and international travellers alike, who flock to the city for uniquely local cultural events.",
         "latitude": "43.034351",
         "longitude": "141.358795"
-    },
-    {
-        "name": "Blackrock",
-        "photo": "images/blackrock.png",
-        "content": "Blackrock is a seaside village that is close to DkIT.",
-        "latitude": "53.96251869",
-        "longitude": "-6.36627104"
     }
 ]
