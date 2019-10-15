@@ -11,7 +11,7 @@ function onAllAssetsLoaded()
 
 async function displayMap()
 {
-
+    
     let locations = [];
     // These constants must start at 0
     // These constants must match the data layout in the 'locations' array below
