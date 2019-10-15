@@ -4,3 +4,78 @@
     width: 100%;
     border: solid black 1px;
 }
+
+#mainContent, 
+#subContent p
+{
+    color: black;
+}
+
+#mainContent,
+.infoBox
+{
+    max-width: 400px;
+    max-height: 250px;
+    font-family: 'Muli', sans-serif;
+    background-color: #F2F2F2;
+    border-radius: 2%;
+    overflow: auto;
+}
+
+#mainContent h1{
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 0;
+    margin-top: 0;
+    font-size: 2em;
+    padding-top: 5px;
+    text-align: center;
+}
+ #mainContent hr
+{
+    width: 40%;
+    margin-right: auto;
+    margin-left: auto;
+    border: 0.5px solid black;
+}
+
+#subContent img
+{
+    clear:both;
+    float: right;
+    width: 150px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 10px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px #888888;
+}
+
+#subContent button
+{ 
+    width: 20%;;
+    margin-left: 40%;
+    margin-right: 40%;
+    height: 30px;
+    background-color: #4285F4;
+    border: 0;
+    border-radius: 2.5px;
+}
+#subContent button:hover
+{
+    background-color: #5491F5;
+    box-shadow: 3px 3px 3px rgba(0,0,0,0.07);
+}
+
+#subContent p
+{
+    margin-left: 5px;
+    font-size: 1.1em;
+}
+
+.infoBox img
+{
+    width: 20px;
+    opacity: 1;
+}

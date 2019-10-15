@@ -22,7 +22,7 @@ async function displayMap()
     let LONGITUDE = 4;
 
 
-    let url = "map_markers.json"; /* JSON file */
+    let url = "json/cities.json"; /* JSON file */
     let urlParameters = ""; /* Leave empty, as no parameter is passed to the JSON file */
 
     try
@@ -44,13 +44,13 @@ async function displayMap()
 
         for (let i = 0; i < jsonData.length; i++)
         {
-            locations.push([i, jsonData[i].title, '<div id="mainContent"><h1>' + jsonData[i].title + '</h1><hr><div id="subContent"><img src="' + jsonData[i].photo + '"><p>' + jsonData[i].content + '</p><p>' + jsonData[i].content2 + '</p><a href="' + jsonData[i].link + '"><button type="button">' + jsonData[i].button + '</button></a></div></div>', parseFloat(jsonData[i].latitude), parseFloat(jsonData[i].longitude)]);
+             locations.push([i, jsonData[i].name, '<div id="mainContent"><h1>' + jsonData[i].name + '</h1><hr><div id="subContent"><img src="' + jsonData[i].photo + '"><p>' + jsonData[i].content + '</p></div></div>', parseFloat(jsonData[i].latitude), parseFloat(jsonData[i].longitude)]);
         }
 
-        let lat_lng = {lat: 54.012530, lng: -6.290782};
+        let lat_lng = {lat: 37.607269, lng: 140.021412};
 
         let dkit_map = new google.maps.Map(document.getElementById("mapDiv"), {
-            zoom: 11,
+            zoom: 5,
             center: lat_lng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
