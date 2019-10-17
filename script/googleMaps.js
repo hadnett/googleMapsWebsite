@@ -13,13 +13,16 @@ async function displayMap()
 {
     
     let locations = [];
+    let what = [];
     // These constants must start at 0
     // These constants must match the data layout in the 'locations' array below
     let ID = 0;  // the marker's zIndex is being used to hold a unique index for each marker
-    let TITLE = 1;
-    let CONTENT = 2;
-    let LATITUDE = 3;
-    let LONGITUDE = 4;
+    let NAME = 1;
+    let PHOTO = 2;
+    let CONTENT = 3;
+    let LATITUDE = 4;
+    let LONGITUDE = 5;
+    let ICON = 6;
 
 
     let url = "json/cities.json"; /* JSON file */
@@ -44,8 +47,10 @@ async function displayMap()
 
         for (let i = 0; i < jsonData.length; i++)
         {
-             locations.push([i, jsonData[i].name, '<div id="mainContent"><h1>' + jsonData[i].name + '</h1><hr><div id="subContent"><img src="' + jsonData[i].photo + '"><p>' + jsonData[i].content + '</p></div></div>', parseFloat(jsonData[i].latitude), parseFloat(jsonData[i].longitude)]);
+             locations.push([i, jsonData[i].name , jsonData[i].photo ,  jsonData[i].content , parseFloat(jsonData[i].latitude), parseFloat(jsonData[i].longitude), jsonData[i].icon]);
         }
+   
+        console.log(locations);
 
         let lat_lng = {lat: 37.607269, lng: 140.021412};
 
@@ -56,15 +61,19 @@ async function displayMap()
         });
 
         let infobox = [];
+        
+        var iconBase = 'https://img.icons8.com/dusk/64/000000/';
+
 
         for (i = 0; i < locations.length; i++)
         {
             let marker = new google.maps.Marker
                     (
                             {
-                                title: locations[i][TITLE],
+                                title: locations[i][NAME],
                                 map: dkit_map,
                                 position: new google.maps.LatLng(locations[i][LATITUDE], locations[i][LONGITUDE]),
+                                icon: iconBase + locations[i][ICON],
                                 zIndex: locations[i][ID]   // the zIndex is being used to hold a unique index for each marker
                             }
                     );
@@ -74,13 +83,13 @@ async function displayMap()
                             {
                                 content: locations[i][CONTENT],
                                 disableAutoPan: false,
-                                pixelOffset: new google.maps.Size(-200, -280),
+                                pixelOffset: new google.maps.Size(-200, -270),
                                 closeBoxMargin: "10px 10px 0px 0px",
                                 closeBoxURL: "images/closeButton.png",
                                 infoBoxClearance: new google.maps.Size(1, 1)
                             }
                     );
-
+            
             google.maps.event.addListener(marker, 'click', function ()
             {
                 // if another inforbox is open, then close it
@@ -92,6 +101,9 @@ async function displayMap()
                 infobox[this.zIndex].open(dkit_map, this);
                 dkit_map.panTo(lat_lng);
             });
+            
+                    
+            
         }
     }
 }
