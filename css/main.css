@@ -28,6 +28,11 @@
     display: none;
 }
 
+#subContent
+{
+    height: auto;
+}
+
 #mainContent h1{
     width: 50%;
     margin-right: auto;
@@ -47,7 +52,7 @@
     border: 0.5px solid black;
 }
 
-#subContent #placeIcon
+#subContent #locationImage
 {
     clear:both;
     float: right;
@@ -86,3 +91,21 @@
     width: 20px;
     opacity: 1;
 }
+
+#logoImage
+{
+    height: 45px;
+    width: 40px;
+    margin-right: 10px;
+}
+
+#title
+{
+    vertical-align: middle;
+}
+
+#header-wrapper.header-slider
+{
+    background: #444 url(../images/rugbyHeaderSlider.jpg) no-repeat center center fixed;
+}
+
