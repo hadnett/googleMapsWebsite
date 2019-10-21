@@ -8,12 +8,10 @@ function onAllAssetsLoaded()
     displayMap();
 }
 
-
 async function displayMap()
 {
 
     let locations = [];
-    let what = [];
     // These constants must start at 0
     // These constants must match the data layout in the 'locations' array below
     let ID = 0;  // the marker's zIndex is being used to hold a unique index for each marker
@@ -44,11 +42,11 @@ async function displayMap()
 
     function updateWebpage(jsonData)
     {
-   
+
         for (let i = 0; i < jsonData.length; i++)
         {
             locations.push([i, jsonData[i].name, jsonData[i].photo, jsonData[i].content, parseFloat(jsonData[i].latitude), parseFloat(jsonData[i].longitude), jsonData[i].icon]);
-            
+
         }
 
         let lat_lng = {lat: 38.403671, lng: 140.468680};
@@ -68,7 +66,7 @@ async function displayMap()
                 url: 'https://img.icons8.com/dusk/64/000000/' + locations[i][ICON],
                 scaledSize: new google.maps.Size(35, 35)
             };
-            
+
             location_content_string = '<div id="mainContent"><h1>' + locations[i][NAME] + '</h1><hr><div id="subContent"><img id="locationImage" src="' + locations[i][PHOTO] + ' "><p>' + locations[i][CONTENT] + '</p></div></div><h2>Gallery</h2><hr>';
 
             let marker = new google.maps.Marker
@@ -93,6 +91,8 @@ async function displayMap()
                                 infoBoxClearance: new google.maps.Size(1, 1)
                             }
                     );
+            
+            document.getElementById("scrollMenu").innerHTML += '<div class="mainContentSlider"><div id="menuImages" ><img src="' + locations[i][PHOTO] + '"></div><div id="menuText">' + locations[i][NAME] + '</div></div>';
 
             google.maps.event.addListener(marker, 'click', function ()
             {
@@ -103,13 +103,11 @@ async function displayMap()
                 }
 
                 infobox[this.zIndex].open(dkit_map, this);
-                dkit_map.panTo(lat_lng);
+                dkit_map.panTo({lat: locations[this.zIndex][LATITUDE], lng: locations[this.zIndex][LONGITUDE]});
             });
-
-            new google.maps.Size(20, 20);
-
-
 
         }
     }
 }
+
+

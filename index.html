@@ -12,11 +12,13 @@
         <link href="color/default.css" rel="stylesheet">
         <link rel="shortcut icon" href="images/favicon.ico">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="script/citySlider.js" type="text/javascript"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5EDRY4wkfO1n8s8fCcyhbPpVHclZzgUc&libraries=places"></script>
         <script src="script/googleMaps.js" type="text/javascript"></script>
         <script type="text/javascript" src="script/infobox.js"></script>
         
         <link href="css/main.css" rel="stylesheet">
+        
     </head>
 
     <body>
@@ -83,11 +85,11 @@
                 <div class="row">
                     <div class="span6 alignright flyLeft">
                         <blockquote class="large">
-                            There's huge space beetween creativity and imagination <cite>Mark Simmons, Nett Media</cite>
+                            Your pride for your country should not come after your country becomes great!
                         </blockquote>
                     </div>
                     <div class="span6 aligncenter flyRight">
-                        <i class="icon-coffee icon-10x"></i>
+                        <i class="icon-trophy icon-10x"></i>
                     </div>
                 </div>
             </div>
@@ -96,70 +98,10 @@
         <!-- section: team -->
         <section id="about" class="section">
             <div class="container">
-                <h4>Who We Are</h4>
-                <div class="row">
-                    <div class="span4 offset1">
-                        <div>
-                            <h2>We live with <strong>creativity</strong></h2>
-                            <p>
-                                Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules. Omnicos directe
-                                al desirabilite de un nov lingua franca: On refusa continuar payar custosi traductores.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="span6">
-                        <div class="aligncenter">
-                            <img src="images/icons/creativity.png" alt="" />
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="span2 offset1 flyIn">
-                        <div class="people">
-                            <img class="team-thumb img-circle" src="images/team/img-1.jpg" alt="" />
-                            <h3>John Doe</h3>
-                            <p>
-                                Art director
-                            </p>
-                        </div>
-                    </div>
-                    <div class="span2 flyIn">
-                        <div class="people">
-                            <img class="team-thumb img-circle" src="images/team/img-2.jpg" alt="" />
-                            <h3>Mike Doe</h3>
-                            <p>
-                                Web developer
-                            </p>
-                        </div>
-                    </div>
-                    <div class="span2 flyIn">
-                        <div class="people">
-                            <img class="team-thumb img-circle" src="images/team/img-3.jpg" alt="" />
-                            <h3>Neil Doe</h3>
-                            <p>
-                                Web designer
-                            </p>
-                        </div>
-                    </div>
-                    <div class="span2 flyIn">
-                        <div class="people">
-                            <img class="team-thumb img-circle" src="images/team/img-4.jpg" alt="" />
-                            <h3>Mark Joe</h3>
-                            <p>
-                                UI designer
-                            </p>
-                        </div>
-                    </div>
-                    <div class="span2 flyIn">
-                        <div class="people">
-                            <img class="team-thumb img-circle" src="images/team/img-5.jpg" alt="" />
-                            <h3>Stephen B</h3>
-                            <p>
-                                Digital imaging
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                <h4>Getting Around</h4>
+                <p>Select a City:<p>
+                <div id="scrollMenu">
+                </div> 
             </div>
             <!-- /.container -->
         </section>
@@ -167,9 +109,7 @@
         <!-- section: services -->
         <section id="services" class="section orange">
             <div class="container">
-                <h4>Get Around</h4>
                 <div id="mapDiv"></div>
-
             </div>
         </section>
         <!-- end section: services -->

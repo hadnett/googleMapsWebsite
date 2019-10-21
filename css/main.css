@@ -109,3 +109,60 @@
     background: #444 url(../images/rugbyHeaderSlider.jpg) no-repeat center center fixed;
 }
 
+.icon-trophy
+{
+    color: black;
+}
+
+#scrollMenu {
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+    height: 280px;
+    box-shadow: 5px 10px 8px #888888;
+}
+
+#scrollMenu img {
+    color: #333;
+    width: 350px;
+    height: 200px;
+    padding: 14px;
+    -webkit-filter: blur(1.5px); /* Safari 6.0 - 9.0 */
+    filter: blur(1.5px);
+    transition-duration: 1s;
+}
+
+#scrollMenu img:hover
+{
+    -webkit-filter: blur(0px); /* Safari 6.0 - 9.0 */
+    filter: blur(0px);
+}
+
+#menuText:hover
+{
+    display:none;
+}
+
+#menuImages,
+#menuText
+{
+    display: inline-block;
+}
+
+#menuText
+{
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.mainContentSlider
+{
+    display: inline-block;
+    padding: 10px;
+}
+
