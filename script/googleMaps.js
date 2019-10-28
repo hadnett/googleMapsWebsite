@@ -8,23 +8,34 @@ function onAllAssetsLoaded()
     displayMap();
 }
 
+let locations = [];
+
+let ID;
+let NAME;
+let PHOTO;
+let CONTENT;
+let LATITUDE;
+let LONGITUDE;
+let ICON;
+let TYPE;
+
+let dkit_map;
+let infobox;
+
 async function displayMap()
 {
 
-    let locations = [];
-    // These constants must start at 0
-    // These constants must match the data layout in the 'locations' array below
-    let ID = 0;  // the marker's zIndex is being used to hold a unique index for each marker
-    let NAME = 1;
-    let PHOTO = 2;
-    let CONTENT = 3;
-    let LATITUDE = 4;
-    let LONGITUDE = 5;
-    let ICON = 6;
+    ID = 0;
+    NAME = 1;
+    PHOTO = 2;
+    CONTENT = 3;
+    LATITUDE = 4;
+    LONGITUDE = 5;
+    ICON = 6;
+    TYPE = 7;
 
-
-    let url = "json/cities.json"; /* JSON file */
-    let urlParameters = ""; /* Leave empty, as no parameter is passed to the JSON file */
+    let url = "json/locationsJapan.json";
+    let urlParameters = "";
 
     try
     {
@@ -45,19 +56,21 @@ async function displayMap()
 
         for (let i = 0; i < jsonData.length; i++)
         {
-            locations.push([i, jsonData[i].name, jsonData[i].photo, jsonData[i].content, parseFloat(jsonData[i].latitude), parseFloat(jsonData[i].longitude), jsonData[i].icon]);
-
+            locations.push([i, jsonData[i].name, jsonData[i].photo, jsonData[i].content, parseFloat(jsonData[i].latitude), parseFloat(jsonData[i].longitude), jsonData[i].icon, jsonData[i].type]);
+            
         }
+        
+        console.log(locations);
 
         let lat_lng = {lat: 38.403671, lng: 140.468680};
 
-        let dkit_map = new google.maps.Map(document.getElementById("mapDiv"), {
+        dkit_map = new google.maps.Map(document.getElementById("mapDiv"), {
             zoom: 5.55,
             center: lat_lng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
 
-        let infobox = [];
+        infobox = [];
 
         let location_content_string;
         for (i = 0; i < locations.length; i++)
@@ -91,9 +104,12 @@ async function displayMap()
                                 infoBoxClearance: new google.maps.Size(1, 1)
                             }
                     );
-            
-            document.getElementById("scrollMenu").innerHTML += '<div class="mainContentSlider"><div id="menuImages" ><img src="' + locations[i][PHOTO] + '"></div><div id="menuText">' + locations[i][NAME] + '</div></div>';
-            
+
+            if (locations[i][TYPE] === "City")
+            {
+                document.getElementById("scrollMenu").innerHTML += '<div class="mainContentSlider"><div class="menuImages"><img onclick="myFunction(' + i + ')" src="' + locations[i][PHOTO] + '"></div><div class="menuText">' + locations[i][NAME] + '</div></div>';
+            };
+
             google.maps.event.addListener(marker, 'click', function ()
             {
                 // if another inforbox is open, then close it
@@ -107,6 +123,20 @@ async function displayMap()
             });
 
         }
+    }
+}
+
+function myFunction(x)
+{
+    for (i = 0; i < locations.length; i++)
+    {
+        if (x === locations[i][ID])
+        {
+            dkit_map.panTo({lat: locations[i][LATITUDE], lng: locations[i][LONGITUDE]});
+            dkit_map.setZoom(15.5);
+            
+        }
+        infobox[i].close();
     }
 }
 

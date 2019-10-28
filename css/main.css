@@ -128,7 +128,7 @@
     height: 200px;
     padding: 14px;
     -webkit-filter: blur(1.5px); /* Safari 6.0 - 9.0 */
-    filter: blur(1.5px);
+    filter: blur(1px);
     transition-duration: 1s;
 }
 
@@ -138,13 +138,13 @@
     filter: blur(0px);
 }
 
-#menuImages,
-#menuText
+.menuImages,
+.menuText
 {
     display: inline-block;
 }
 
-#menuText
+.menuText
 {
     color: white;
     font-weight: 600;
