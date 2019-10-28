@@ -107,7 +107,7 @@ async function displayMap()
 
             if (locations[i][TYPE] === "City")
             {
-                document.getElementById("scrollMenu").innerHTML += '<div class="mainContentSlider"><div class="menuImages"><img onclick="myFunction(' + i + ')" src="' + locations[i][PHOTO] + '"></div><div class="menuText">' + locations[i][NAME] + '</div></div>';
+                document.getElementById("scrollMenu").innerHTML += '<div class="mainContentSlider"><div class="menuImages"><img onclick="panToCity(' + i + ')" src="' + locations[i][PHOTO] + '"></div><div class="menuText">' + locations[i][NAME] + '</div></div>';
             };
 
             google.maps.event.addListener(marker, 'click', function ()
@@ -126,7 +126,7 @@ async function displayMap()
     }
 }
 
-function myFunction(x)
+function panToCity(x)
 {
     for (i = 0; i < locations.length; i++)
     {
