@@ -138,11 +138,6 @@
     filter: blur(0px);
 }
 
-#menuText:hover
-{
-    display:none;
-}
-
 #menuImages,
 #menuText
 {

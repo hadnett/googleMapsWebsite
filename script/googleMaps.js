@@ -93,7 +93,7 @@ async function displayMap()
                     );
             
             document.getElementById("scrollMenu").innerHTML += '<div class="mainContentSlider"><div id="menuImages" ><img src="' + locations[i][PHOTO] + '"></div><div id="menuText">' + locations[i][NAME] + '</div></div>';
-
+            
             google.maps.event.addListener(marker, 'click', function ()
             {
                 // if another inforbox is open, then close it
