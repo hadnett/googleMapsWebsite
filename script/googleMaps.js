@@ -55,13 +55,7 @@ async function displayMap()
 
         }
 
-        let lat_lng = {lat: 38.403671, lng: 140.468680};
-
-        map = new google.maps.Map(document.getElementById("mapDiv"), {
-            zoom: 5.55,
-            center: lat_lng,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        });
+        createMap();
 
         infobox = [];
         let nearbyServicesMarkers = [];
@@ -275,3 +269,4 @@ function getIcon()
 
     return icon;
 }
+

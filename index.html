@@ -14,19 +14,15 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="script/citySlider.js" type="text/javascript"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5EDRY4wkfO1n8s8fCcyhbPpVHclZzgUc&libraries=places"></script>
-
+        <script src="script/createMap.js" type="text/javascript"></script>
         <script src="script/googleMaps.js" type="text/javascript"></script>
         <script type="text/javascript" src="script/infobox.js"></script>
-
+        <script src="script/calculateRoute.js" type="text/javascript"></script>
         <link href="css/main.css" rel="stylesheet">
-
-
-
-
 
     </head>
 
-    <body>
+    <body onload='init()'>
         <!-- navbar -->
         <div class="navbar-wrapper">
             <div class="navbar navbar-inverse navbar-fixed-top">
@@ -114,16 +110,34 @@
         <!-- section: services -->
         <section id="services" class="section orange">
             <div class="container">
-                <div class="mapFilters">Filter Search</div>
-                <select id="locationList" name="locationType">
-                    <option onclick="displayMap()" value="cafe">Cafes</option>
-                    <option value="restaurant">Restaurants</option>
-                    <option value="bar">Bars</option>                  
-                    <option value="night_club">Night Clubs</option>
-                    <option value="parking">Parking</option>
-                    <option value="hospital">Hospital</option>
-                    <option value="police">Police</option>
-                </select> 
+                <div id="controlPanel">
+                    <div class='filter'>
+                        <div class="filterHeading">Filter Locations</div>
+                        <select id="locationList" name="locationType">
+                            <option  value="cafe">Cafes</option>
+                            <option value="restaurant">Restaurants</option>
+                            <option value="bar">Bars</option>                  
+                            <option value="night_club">Night Clubs</option>
+                            <option value="parking">Parking</option>
+                            <option value="hospital">Hospital</option>
+                            <option value="police">Police</option>
+                        </select> 
+                    </div>
+                    <div class='filter'>
+                        <div id="filterHeadingStart">Start</div>
+                        <div id='textArea'>
+                            <input id="start" type="text">
+                        </div>
+                    </div>
+                    <div class='filter'>
+                        <div id="filterHeadingEnd">End</div>
+                        <div id='endSumit'>
+                        <input id="end" type="text">
+                        <button onclick='calculateRoute()'>Submit</button>
+                        </div>
+                    </div>
+                </div>
+              
                 <div id="mapDiv"></div>
             </div>
         </section>
@@ -131,7 +145,7 @@
         <!-- section: works -->
         <section id="works" class="section">
             <div class="container clearfix">
-                <h4>Our Works</h4>
+                <h4>Highlights</h4>
                 <!-- portfolio filter -->
                 <div class="row">
                     <div id="filters" class="span12">

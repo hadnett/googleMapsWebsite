@@ -199,7 +199,7 @@ h4
     
 }
 
-.mapFilters
+.filterHeading
 {
     color: #000;
     font-weight: 600;
@@ -207,8 +207,71 @@ h4
     margin-bottom: 5px;
 }
 
+#filterHeadingStart,
+#filterHeadingEnd
+{
+    color: #000;
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 5px;
+    width: 30%;
+}
+
+#filterHeadingStart
+{
+    float: left;
+}
+
+
 #locationList
 {
     color: #000;
+    width: 60%;
 }
 
+#start
+{
+    width: 60%;
+    margin-bottom: 10px;
+    height: 30px;
+}
+
+#start,
+#end
+{
+    width: 60%;
+    height: 30px;
+}
+
+#start
+{
+    float: left;
+}
+
+#end
+{
+    margin-bottom: 0;
+}
+
+.filter
+{
+    width: 33.33%;
+    float: left;
+}
+
+#textArea
+{
+    width: 100%;
+    float: left;
+}
+
+#endSubmit
+{
+    margin-bottom: 10px;
+}
+
+#controlPanel
+{
+    padding-right: auto;
+    padding-left: auto;
+}
