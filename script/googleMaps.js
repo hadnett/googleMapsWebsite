@@ -10,17 +10,12 @@ function onAllAssetsLoaded()
 
 let locations = [];
 
-let ID;
-let NAME;
-let PHOTO;
-let CONTENT;
 let LATITUDE;
 let LONGITUDE;
-let ICON;
-let TYPE;
 
-let dkit_map;
+let map;
 let infobox;
+let location_marker;
 
 async function displayMap()
 {
@@ -57,21 +52,19 @@ async function displayMap()
         for (let i = 0; i < jsonData.length; i++)
         {
             locations.push([i, jsonData[i].name, jsonData[i].photo, jsonData[i].content, parseFloat(jsonData[i].latitude), parseFloat(jsonData[i].longitude), jsonData[i].icon, jsonData[i].type]);
-            
+
         }
-        
-        console.log(locations);
 
         let lat_lng = {lat: 38.403671, lng: 140.468680};
 
-        dkit_map = new google.maps.Map(document.getElementById("mapDiv"), {
+        map = new google.maps.Map(document.getElementById("mapDiv"), {
             zoom: 5.55,
             center: lat_lng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
 
         infobox = [];
-
+        let nearbyServicesMarkers = [];
         let location_content_string;
         for (i = 0; i < locations.length; i++)
         {
@@ -82,18 +75,26 @@ async function displayMap()
 
             location_content_string = '<div id="mainContent"><h1>' + locations[i][NAME] + '</h1><hr><div id="subContent"><img id="locationImage" src="' + locations[i][PHOTO] + ' "><p>' + locations[i][CONTENT] + '</p></div></div><h2>Gallery</h2><hr>';
 
-            let marker = new google.maps.Marker
-                    (
-                            {
-                                title: locations[i][NAME],
-                                map: dkit_map,
-                                position: new google.maps.LatLng(locations[i][LATITUDE], locations[i][LONGITUDE]),
-                                icon: icon,
-                                zIndex: locations[i][ID] // the zIndex is being used to hold a unique index for each marker
-                            }
-                    );
+            if (locations[i][TYPE] === "City")
+            {
+                document.getElementById("scrollMenu").innerHTML += '<div class="mainContentSlider" onclick="panToCity(' + i + ')"><div class="menuImages"><img src="' + locations[i][PHOTO] + '"></div><div class="menuText"><a>' + locations[i][NAME] + '</a></div></div>';
+            }
+            ;
 
-            infobox[marker.zIndex] = new InfoBox
+            let location_marker;
+            let mapWindow = new google.maps.InfoWindow();
+
+            location_marker = new google.maps.Marker(
+                    {
+                        title: locations[i][NAME],
+                        map: map,
+                        position: new google.maps.LatLng(locations[i][LATITUDE], locations[i][LONGITUDE]),
+                        icon: icon,
+                        zIndex: locations[i][ID]
+                    }
+            );
+
+            infobox[location_marker.zIndex] = new InfoBox
                     (
                             {
                                 content: location_content_string,
@@ -105,22 +106,88 @@ async function displayMap()
                             }
                     );
 
-            if (locations[i][TYPE] === "City")
+            google.maps.event.addListener(location_marker, 'click', function ()
             {
-                document.getElementById("scrollMenu").innerHTML += '<div class="mainContentSlider"><div class="menuImages"><img onclick="panToCity(' + i + ')" src="' + locations[i][PHOTO] + '"></div><div class="menuText">' + locations[i][NAME] + '</div></div>';
-            };
-
-            google.maps.event.addListener(marker, 'click', function ()
-            {
-                // if another inforbox is open, then close it
-                for (i = 0; i < infobox.length; i++)
-                {
-                    infobox[i].close();
-                }
-
-                infobox[this.zIndex].open(dkit_map, this);
-                dkit_map.panTo({lat: locations[this.zIndex][LATITUDE], lng: locations[this.zIndex][LONGITUDE]});
+                infoBoxClose();
+                infobox[this.zIndex].open(map, this);
+                map.panTo({lat: locations[this.zIndex][LATITUDE], lng: locations[this.zIndex][LONGITUDE]});
             });
+
+            for (let i = 0; i < locations.length; i++)
+            {
+
+                google.maps.event.addListener(location_marker, 'click', (function (location_marker, i)
+                {
+                    return function ()
+                    {
+
+                        let services_centre_location = location_marker.position;
+                        mapWindow.close();
+                        let service = new google.maps.places.PlacesService(map);
+                        service.nearbySearch(
+                                {
+                                    location: services_centre_location,
+                                    radius: 1000,
+                                    type: [getType()]
+                                }, getNearbyServicesMarkers);
+                    }
+                })(location_marker, i));
+            }
+
+
+
+            function getNearbyServicesMarkers(results, status)
+            {
+                if (status === google.maps.places.PlacesServiceStatus.OK)
+                {
+                    if (nearbyServicesMarkers.length > 0)
+                    {
+                        for (let i = 0; i < nearbyServicesMarkers.length; i++)
+                        {
+                            nearbyServicesMarkers[i].setVisible(false);
+                        }
+                    }
+                    nearbyServicesMarkers = [];
+
+                    for (let i = 0; i < results.length; i++)
+                    {
+                        createMarker(results[i]);
+                    }
+                }
+            }
+
+            function createMarker(place)
+            {
+                let marker = new google.maps.Marker(
+                        {
+                            map: map,
+                            icon: getIcon(),
+                            position: place.geometry.location
+                        });
+
+                nearbyServicesMarkers.push(marker);
+
+                google.maps.event.addListener(marker, 'click', function ()
+                {
+                    let phoneNumber = place.international_phone_number;
+                    let address = place.formatted_address;
+
+                    if (phoneNumber === undefined)
+                    {
+                        phoneNumber = "Not Listed";
+                    }
+                    if (address === undefined)
+                    {
+                        address = "Not Listed";
+                    }
+
+                    infoBoxClose();
+                    mapWindow.setContent('<strong>' + place.name + '</strong><br><br><div>Address: ' + address + '</div><div>Phone Number: ' + phoneNumber + '</div>');
+                    mapWindow.open(map, this);
+
+                });
+            }
+
 
         }
     }
@@ -132,12 +199,79 @@ function panToCity(x)
     {
         if (x === locations[i][ID])
         {
-            dkit_map.panTo({lat: locations[i][LATITUDE], lng: locations[i][LONGITUDE]});
-            dkit_map.setZoom(15.5);
-            
+            map.panTo({lat: locations[i][LATITUDE], lng: locations[i][LONGITUDE]});
+            map.setZoom(15);
+
         }
         infobox[i].close();
     }
 }
 
+function infoBoxClose()
+{
+    for (i = 0; i < infobox.length; i++)
+    {
+        infobox[i].close();
+    }
+}
 
+function getType()
+{
+    let selection = document.getElementById("locationList");
+    let value = selection.options[selection.selectedIndex].value;
+
+    return value;
+}
+
+function getIcon()
+{
+    let icon;
+    console.log();
+    if (getType() === 'cafe')
+    {
+        icon = {
+            url: 'https://img.icons8.com/dusk/64/000000/tea-cup.png',
+            scaledSize: new google.maps.Size(35, 35)
+        };
+
+
+    } else if (getType() === 'restaurant')
+    {
+        icon = {
+            url: 'https://img.icons8.com/dusk/64/000000/restaurant.png',
+            scaledSize: new google.maps.Size(35, 35)
+        };
+    } else if (getType() === 'bar')
+    {
+        icon = {
+            url: 'https://img.icons8.com/dusk/64/000000/bar.png',
+            scaledSize: new google.maps.Size(35, 35)
+        };
+    } else if (getType() === 'night_club')
+    {
+        icon = {
+            url: 'https://img.icons8.com/dusk/64/000000/dj.png',
+            scaledSize: new google.maps.Size(35, 35)
+        };
+    } else if (getType() === 'parking')
+    {
+        icon = {
+            url: 'https://img.icons8.com/dusk/64/000000/parking.png',
+            scaledSize: new google.maps.Size(35, 35)
+        };
+    } else if (getType() === 'hospital')
+    {
+        icon = {
+            url: 'https://img.icons8.com/dusk/64/000000/hospital.png',
+            scaledSize: new google.maps.Size(35, 35)
+        };
+    } else if (getType() === 'police')
+    {
+        icon = {
+            url: 'https://img.icons8.com/dusk/64/000000/policeman-male.png',
+            scaledSize: new google.maps.Size(35, 35)
+        };
+    }
+
+    return icon;
+}

@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="script/citySlider.js" type="text/javascript"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5EDRY4wkfO1n8s8fCcyhbPpVHclZzgUc&libraries=places"></script>
+
         <script src="script/googleMaps.js" type="text/javascript"></script>
         <script type="text/javascript" src="script/infobox.js"></script>
 
@@ -103,20 +104,26 @@
         <section id="about" class="section">
             <div class="container">
                 <h4>Getting Around</h4>
-                <p>Select a City:<p>
-
-                    
+                <p>Select a City:</p>   
                 <div id="scrollMenu">
                 </div> 
-            </div>
-            <div id="what">
-            </div>                    
+            </div>                
             <!-- /.container -->
         </section>
         <!-- end section: team -->
         <!-- section: services -->
         <section id="services" class="section orange">
             <div class="container">
+                <div class="mapFilters">Filter Search</div>
+                <select id="locationList" name="locationType">
+                    <option onclick="displayMap()" value="cafe">Cafes</option>
+                    <option value="restaurant">Restaurants</option>
+                    <option value="bar">Bars</option>                  
+                    <option value="night_club">Night Clubs</option>
+                    <option value="parking">Parking</option>
+                    <option value="hospital">Hospital</option>
+                    <option value="police">Police</option>
+                </select> 
                 <div id="mapDiv"></div>
             </div>
         </section>
