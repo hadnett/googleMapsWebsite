@@ -121,24 +121,35 @@
                             <option value="parking">Parking</option>
                             <option value="hospital">Hospital</option>
                             <option value="police">Police</option>
+                            <option value="lodging">Hotel</option>
                         </select> 
                     </div>
                     <div class='filter'>
                         <div id="filterHeadingStart">Start</div>
                         <div id='textArea'>
                             <input id="start" type="text">
+                            <!-- Transit not included as it does not work in Japan -->
+                            <button onclick="travelMode= 'DRIVING'; calculateRoute()"><i class="fas fa-car"></i></button>
+                            <!--<button class ="walking" onclick="travelMode= 'WALKING'; calculateRoute()"></button>
+                            <button class ="biking" onclick="travelMode= 'BICYCLING'; calculateRoute()"></button> -->
                         </div>
                     </div>
                     <div class='filter'>
                         <div id="filterHeadingEnd">End</div>
-                        <div id='endSumit'>
+                        <div id='endSubmit'>
                         <input id="end" type="text">
                         <button onclick='calculateRoute()'>Submit</button>
+                        <button onclick="resetRoute()"> Reset </button>
                         </div>
                     </div>
+                    
                 </div>
               
                 <div id="mapDiv"></div>
+                <br>
+                <details><summary id="directionsHeading">Route Directions</summary>
+                <div id="directions"></div>
+                </details>
             </div>
         </section>
         <!-- end section: services -->
@@ -355,7 +366,7 @@
         <!-- section: blog -->
         <section id="blog" class="section">
             <div class="container">
-                <h4>Our Blog</h4>
+                <h4>Japan</h4>
                 <!-- Three columns -->
                 <div class="row">
                     <div class="span3">

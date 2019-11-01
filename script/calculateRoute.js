@@ -21,8 +21,10 @@ function init()
 
     directionsDisplay = new google.maps.DirectionsRenderer();
     
-    
+    directionsDisplay.setPanel(document.getElementById('directions'));
 }
+
+let travelMode = "DRIVING";
 
 function calculateRoute()
 {
@@ -34,7 +36,7 @@ function calculateRoute()
     
     let request = {origin: start,
         destination: end,
-        travelMode: google.maps.TravelMode.DRIVING};
+        travelMode: google.maps.TravelMode[travelMode]};
     
     directionsDisplay.setMap(map);
 
@@ -45,4 +47,11 @@ function calculateRoute()
             directionsDisplay.setDirections(response);
         }
     });
+}
+
+function resetRoute()
+{   
+    displayMap();
+    
+    document.getElementById('directions').innerHTML = "";
 }

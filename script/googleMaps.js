@@ -67,7 +67,7 @@ async function displayMap()
                 scaledSize: new google.maps.Size(35, 35)
             };
 
-            location_content_string = '<div id="mainContent"><h1>' + locations[i][NAME] + '</h1><hr><div id="subContent"><img id="locationImage" src="' + locations[i][PHOTO] + ' "><p>' + locations[i][CONTENT] + '</p></div></div><h2>Gallery</h2><hr>';
+            location_content_string = '<div id="mainContent"><h1>' + locations[i][NAME] + '</h1><hr><div id="subContent"><img id="locationImage" src="' + locations[i][PHOTO] + ' "><p>' + locations[i][CONTENT] + '</p></div></div>';
 
             if (locations[i][TYPE] === "City")
             {
@@ -263,6 +263,13 @@ function getIcon()
     {
         icon = {
             url: 'https://img.icons8.com/dusk/64/000000/policeman-male.png',
+            scaledSize: new google.maps.Size(35, 35)
+        };
+    }
+    else if (getType() === 'lodging')
+    {
+        icon = {
+            url: 'https://img.icons8.com/dusk/64/000000/3-star-hotel.png',
             scaledSize: new google.maps.Size(35, 35)
         };
     }
