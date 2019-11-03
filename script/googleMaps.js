@@ -68,10 +68,10 @@ async function displayMap()
                 scaledSize: new google.maps.Size(35, 35)
             };
 
-            location_content_string = '<div id="mainContent"><h1>' + locations[i][NAME] + '</h1><hr><div id="subContent"><img id="locationImage" src="' + locations[i][PHOTO] + ' "><p>' + locations[i][CONTENT] + '</p><button onclick="calculateRouteCurrent(' + locations[i][LATITUDE] + ',' + locations[i][LONGITUDE] + ')">Get Directions</button></div></div>';
+            location_content_string = '<div id="mainContent"><h1>' + locations[i][NAME] + '</h1><hr><div id="subContent"><img id="locationImage" src="' + locations[i][PHOTO] + ' "><p>' + locations[i][CONTENT] + '</p><button class="directionsButton" onclick="calculateRouteCurrent(' + locations[i][LATITUDE] + ',' + locations[i][LONGITUDE] + ')">Get Directions</button></div></div>';
             if (locations[i][TYPE] === "City")
             {
-                document.getElementById("scrollMenu").innerHTML += '<div class="mainContentSlider" onclick="panToCity(' + i + ')"><div class="menuImages"><img src="' + locations[i][PHOTO] + '"></div><div class="menuText"><a>' + locations[i][NAME] + '</a></div></div>';
+                document.getElementById("scrollMenu").innerHTML += '<div class="mainContentSlider" onclick="panToCity(' + i + ')"><div class="menuImages"><img src="' + locations[i][PHOTO] + '"></div><div class="menuText"><a>' + locations[i][NAME] + '</a></div><div class="menuContent"><p>' + locations[i][CONTENT] + '</p></div></div>';
             }
             ;
 
@@ -194,6 +194,7 @@ async function displayMap()
                 address = place.formatted_address;
                 address = address.replace(/,/g, '<br>');
                 let phoneNumber = place.international_phone_number;
+                let website = place.website;
 
                 if (address === undefined)
                 {
@@ -203,9 +204,13 @@ async function displayMap()
                 {
                     phoneNumber = "Not Listed";
                 }
+                if (website === undefined)
+                {
+                    website = "Not Listed";
+                }
 
                 infoBoxClose();
-                mapWindow.setContent('<div class="serviceName"><strong>' + place.name + '</strong></div><br><div><strong>Address: </strong><br>' + address + '</div><br><div><strong>Phone Number: </strong>' + phoneNumber + '</div>');
+                mapWindow.setContent('<div class="serviceName"><strong>' + place.name + '</strong></div><br><div><strong>Address: </strong><br>' + address + '</div><br><div><strong>Phone Number: </strong>' + phoneNumber + '</div><br><div><strong>Website: </strong><br><a href="' + website + '" target="_blank">' + website + ' </a></div><br><div><button class="directionsButton" onclick="calculateRouteCurrent(' + place.geometry.location.lat() + ',' + place.geometry.location.lng() + ')">Get Directions</button></div>');
                 mapWindow.open(map, this);
 
             });

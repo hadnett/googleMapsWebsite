@@ -10,17 +10,15 @@
         <link href="css/bootstrap-responsive.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
         <link href="color/default.css" rel="stylesheet">
-        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="shortcut icon" href="images/favIcon.png">
         <script src="https://kit.fontawesome.com/0c9387c877.js" crossorigin="anonymous"></script>
-        <script src="script/citySlider.js" type="text/javascript"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5EDRY4wkfO1n8s8fCcyhbPpVHclZzgUc&libraries=places"></script>
         <script src="script/createMap.js" type="text/javascript"></script>
         <script src="script/googleMaps.js" type="text/javascript"></script>
         <script type="text/javascript" src="script/infobox.js"></script>
         <script src="script/calculateRoute.js" type="text/javascript"></script>
         <link href="css/main.css" rel="stylesheet">
-
-        <script src="script/currentLocation.js" type="text/javascript"></script>
+        <script src="script/emailDirections.js" type="text/javascript"></script>
 
     </head>
 
@@ -33,13 +31,13 @@
                         <!-- Responsive navbar -->
                         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                         </a>
-                        <h1 class="brand"><img id="logoImage" src="images/worldCupLogo.png" alt="World Cup Logo"><a id="title" href="index.html">RWC19</a></h1>
+                        <h1 class="brand"><img id="logoImage" src="images/websiteLogo.png" alt="World Cup Logo"><a id="title" href="index.html">RWC19</a></h1>
                         <!-- navigation -->
                         <nav class="pull-right nav-collapse collapse">
                             <ul id="menu-main" class="nav">
-                                <li><a title="Get Around" href="#about">Get Around</a></li>
-                                <li><a title="The Teams" href="#works">The Teams</a></li>
-                                <li><a title="Japan" href="#blog">Japan</a></li>
+                                <li><a title="Get Around" href="#getAround">Get Around</a></li>
+                                <li><a title="The Teams" href="#theTeams">The Teams</a></li>
+                                <li><a title="Japan" href="#japan">Japan</a></li>
                                 <li><a title="contact" href="#contact">Contact Us</a></li>
                             </ul>
                         </nav>
@@ -51,7 +49,7 @@
         <div id="header-wrapper" class="header-slider">
             <header class="clearfix">
                 <div class="logo">
-                    <img src="images/logo-image.png" alt="" />
+                    <img id="websiteLogo" src="images/websiteLogo.png" alt="" />
                 </div>
                 <div class="container">
                     <div class="row">
@@ -98,7 +96,7 @@
         </section>
         <!-- end spacer section -->
         <!-- section: team -->
-        <section id="about" class="section">
+        <section id="getAround" class="section">
             <div class="container">
                 <h4>Getting Around</h4>
                 <p>Select a City:</p>   
@@ -147,14 +145,16 @@
 
                 <div id="mapDiv"></div>
                 <br>
+                
                 <details><summary id="directionsHeading">Route Directions</summary>
                     <div id="directions"></div>
+                    <button id="emailButton" onclick="emailDirections()">Email Directions</button>
                 </details>
             </div>
         </section>
         <!-- end section: services -->
         <!-- section: works -->
-        <section id="works" class="section">
+        <section id="theTeams" class="section">
             <div class="container clearfix">
                 <h4>The Teams</h4>
                 <!-- portfolio filter -->
@@ -425,7 +425,7 @@
                                         <div class="portfolio-overlay">
                                             <div class="thumb-info">
                                                 <h5>USA</h5>
-                                               <i class="fas fa-users icon-2x"></i>
+                                                <i class="fas fa-users icon-2x"></i>
                                             </div>
                                         </div>
                                     </a>
@@ -438,7 +438,7 @@
                                         <div class="portfolio-overlay">
                                             <div class="thumb-info">
                                                 <h5>Wales</h5>
-                                               <i class="fas fa-users icon-2x"></i>
+                                                <i class="fas fa-users icon-2x"></i>
                                             </div>
                                         </div>
                                     </a>
@@ -455,102 +455,104 @@
                 <div class="row">
                     <div class="span12 aligncenter flyLeft">
                         <blockquote class="large">
-                            We are an established and trusted web agency with a reputation for commitment and high integrity
+                            Don't just listen to the action. Come see it!
                         </blockquote>
                     </div>
                     <div class="span12 aligncenter flyRight">
-                        <i class="icon-rocket icon-10x"></i>
+                        <i class="fas fa-plane icon-8x"></i>
                     </div>
                 </div>
             </div>
         </section>
         <!-- end spacer section -->
         <!-- section: blog -->
-        <section id="blog" class="section">
+        <section id="japan" class="section">
             <div class="container">
                 <h4>Japan</h4>
-                <!-- Three columns -->
-                <div class="row">
-                    <div class="span3">
-                        <div class="home-post">
-                            <div class="post-image">
-                                <img class="max-img" src="images/blog/img1.jpg" alt="" />
-                            </div>
-                            <div class="post-meta">
-                                <i class="icon-file icon-2x"></i>
-                                <span class="date">June 19, 2013</span>
-                                <span class="tags"><a href="#">Design</a>, <a href="#">Blog</a></span>
-                            </div>
-                            <div class="entry-content">
-                                <h5><strong><a href="#">New design trends</a></strong></h5>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. &hellip;
-                                </p>
-                                <a href="#" class="more">Read more</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="span3">
-                        <div class="home-post">
-                            <div class="post-image">
-                                <img class="max-img" src="images/blog/img2.jpg" alt="" />
-                            </div>
-                            <div class="post-meta">
-                                <i class="icon-file icon-2x"></i>
-                                <span class="date">June 19, 2013</span>
-                                <span class="tags"><a href="#">Design</a>, <a href="#">News</a></span>
-                            </div>
-                            <div class="entry-content">
-                                <h5><strong><a href="#">Retro is great</a></strong></h5>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. &hellip;
-                                </p>
-                                <a href="#" class="more">Read more</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="span3">
-                        <div class="home-post">
-                            <div class="post-image">
-                                <img class="max-img" src="images/blog/img3.jpg" alt="" />
-                            </div>
-                            <div class="post-meta">
-                                <i class="icon-file icon-2x"></i>
-                                <span class="date">June 22, 2013</span>
-                                <span class="tags"><a href="#">Design</a>, <a href="#">Tips</a></span>
-                            </div>
-                            <div class="entry-content">
-                                <h5><strong><a href="#">Isometric mockup</a></strong></h5>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. &hellip;
-                                </p>
-                                <a href="#" class="more">Read more</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="span3">
-                        <div class="home-post">
-                            <div class="post-image">
-                                <img class="max-img" src="images/blog/img4.jpg" alt="" />
-                            </div>
-                            <div class="post-meta">
-                                <i class="icon-file icon-2x"></i>
-                                <span class="date">June 27, 2013</span>
-                                <span class="tags"><a href="#">News</a>, <a href="#">Tutorial</a></span>
-                            </div>
-                            <div class="entry-content">
-                                <h5><strong><a href="#">Free icon set</a></strong></h5>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. &hellip;
-                                </p>
-                                <a href="#" class="more">Read more</a>
-                            </div>
-                        </div>
-                    </div>
+                <p id='japanHeading'>Japan is truly timeless, a place where ancient traditions are fused with modern life as if it were the most natural thing in the world.</p>
+                <hr>
+                <h5>Things You Should Know</h5>
+                <div id="tips">
+                    <h6>1. Safety in Japan is high.</h6>
+                    <p>One of the best things about Japan is that it is safe. Repeatedly shining on top ten lists of the world’s safest countries, Japan is also a great place for solo female travelers. That doesn’t mean you can throw caution to the wind.</p>
+                    <h6>2. Cash is King</h6>
+                    <p>Cash is king in Japan. Workers are usually paid in cash and most businesses and services, including restaurants and shops, accept only cash. Your hotel and some big department stores will usually take credit, but always check first. That said, make sure to always have plenty of yen in your wallet in order to avoid awkward conversations that can easily get lost in translation.</p>
+                    <h6>3. Keeping Your Shoes on Can be Offensive</h6>
+                    <p>Leaving your shoes on when entering someone’s house is a major sign of disrespect. Like many other parts of Asia, removing your shoes when entering a home is an absolute must. This is also the norm for several restaurants, so be sure to check around if you should slip your shoes off or not.</p>
+                    <h6>4. Speak quietly in public in Japan</h6>
+                    <p>Watching the volume of your voice — and the content of your conversation — is extremely important in Japan. Everyone in Japan is aware of the fact that they are sharing space with others, so keeping conversations to a minimum and voice levels at a low volume in public is always appreciated.</p>
+                    <h6>5. Don’t Flag Down Your Waiter</h6>
+                    <p>When in Japan, you don’t have to impatiently flag down your waiter. Many restaurant tables have a small black box with a black button so that customers can summon the waiter without calling attention to themselves or creating disruptive noises. Better yet, some spots don’t even have waiters. Instead, guests order from a screen in their booth and the food arrives in a little slot.</p>
+                    <h6>6. Enjoy Yourself</h6>
+                    <p>Japan is an amazing place so enjoy what it has to offer.</p>
                 </div>
-                <div class="blankdivider30"></div>
-                <div class="aligncenter">
-                    <a href="#" class="btn btn-large btn-theme">More blog post</a>
+                <hr>
+                <h5>Basic Phrases</h5> 
+                <p>Most locals have a relatively good understanding of English but some of these phrases may come in useful during your trip.</p>
+                <div class="audioRow">
+                    <div class="audioColumn">
+                        <p>Yes</p>
+                        <audio controls>
+                            <source src="audio/yes.mp3" type="audio/mp3">
+                            Your Browser does not support Audio Element!
+                        </audio>
+                    </div>
+                    <div class="audioColumn">
+                        <p>No</p>
+                        <audio controls>
+                            <source src="audio/no.mp3" type="audio/mp3">
+                            Your Browser does not support Audio Element!
+                        </audio>
+                    </div>
+                    <div class="audioColumn">
+                        <p>Please</p>
+                        <audio controls>
+                            <source src="audio/please.mp3" type="audio/mp3">
+                            Your Browser does not support Audio Element!
+                        </audio>
+                    </div>
+                    <div class="audioColumn">
+                        <p>Thank-you</p>
+                        <audio controls>
+                            <source src="audio/thank-you.mp3" type="audio/mp3">
+                            Your Browser does not support Audio Element!
+                        </audio>
+                    </div>
+                    <div class="audioColumn">
+                        <p>I'm Sorry</p>
+                        <audio controls>
+                            <source src="audio/im-sorry.mp3" type="audio/mp3">
+                            Your Browser does not support Audio Element!
+                        </audio>
+                    </div>
+                    <div class="audioColumn">
+                        <p>Good Morning</p>
+                        <audio controls>
+                            <source src="audio/good-morning.mp3" type="audio/mp3">
+                            Your Browser does not support Audio Element!
+                        </audio>
+                    </div>
+                    <div class="audioColumn">
+                        <p>Good Night</p>
+                        <audio controls>
+                            <source src="audio/good-night.mp3" type="audio/mp3">
+                            Your Browser does not support Audio Element!
+                        </audio>
+                    </div>
+                    <div class="audioColumn">
+                        <p>Do you speak English?</p>
+                        <audio controls>
+                            <source src="audio/speak-english.mp3" type="audio/mp3">
+                            Your Browser does not support Audio Element!
+                        </audio>
+                    </div>
+                    <div class="audioColumn">
+                        <p>Can you speak more slowly?</p>
+                        <audio controls>
+                            <source src="audio/speak-slow.mp3" type="audio/mp3">
+                            Your Browser does not support Audio Element!
+                        </audio>
+                    </div>
                 </div>
             </div>
         </section>
@@ -561,8 +563,7 @@
             <div class="container">
                 <h4>Get in Touch</h4>
                 <p>
-                    Reque facer nostro et ius, cu persius mnesarchum disputando eam, clita prompta et mel vidisse phaedrum pri et. Facilisis posidonium ex his. Mutat iudico vis in, mea aeque tamquam scripserit an, mea eu ignota viderer probatus. Lorem legere consetetur ei
-                    eum. Sumo aeque assentior te eam, pri nominati posidonium consttuam
+                    Don't be shy! Get in touch and let us know your thoughts about Japan and our services.
                 </p>
                 <div class="blankdivider30">
                 </div>
@@ -607,15 +608,15 @@
                 <div class="row">
                     <div class="span6 offset3">
                         <ul class="social-networks">
-                            <li><a href="#"><i class="icon-circled icon-bgdark icon-instagram icon-2x"></i></a></li>
-                            <li><a href="#"><i class="icon-circled icon-bgdark icon-twitter icon-2x"></i></a></li>
-                            <li><a href="#"><i class="icon-circled icon-bgdark icon-dribbble icon-2x"></i></a></li>
-                            <li><a href="#"><i class="icon-circled icon-bgdark icon-pinterest icon-2x"></i></a></li>
+                            <li><a href="https://www.instagram.com/visitjapanjp/" target="_blank"><i class="icon-circled icon-bgdark icon-instagram icon-2x"></i></a></li>
+                            <li><a href="https://twitter.com/visit_japan?lang=en" target="_blank"><i class="icon-circled icon-bgdark icon-twitter icon-2x"></i></a></li>
                         </ul>
                         <!-- Footer Text --> 
                     </div>
                 </div>
             </div>
+            <p>Website for Educational Purposes Only</p>
+            <div>Flag Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
             <!-- ./container -->
         </footer>
         <a href="#" class="scrollup"><i class="icon-angle-up icon-square icon-bgdark icon-2x"></i></a>

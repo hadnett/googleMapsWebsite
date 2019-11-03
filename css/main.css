@@ -10,6 +10,16 @@
     font-style: normal;
 }
 
+* 
+{
+    box-sizing: border-box;
+}
+
+#websiteLogo
+{
+    width: 200px;
+}
+
 #mapDiv
 {
     height: 600px;
@@ -32,6 +42,7 @@
     background-color: #F2F2F2;
     border-radius: 2%;
     scrollbar-width: none;
+    
 
 }
 
@@ -41,15 +52,12 @@
     overflow: auto;
     position: relative;
     top: -30px;
-}
-
-.infoBox
-{
     border: 2px solid #000;
 }
 
 .infoBox:after
 {
+    
     position: absolute;
     width: 35px;
     height: 35px;
@@ -110,17 +118,26 @@
     box-shadow: 3px 3px 5px #888888;
 }
 
-#subContent button
+.directionsButton
 { 
-    width: 30%;;
+    width: 30%;
     margin-left: 35%;
     margin-right: 35%;
     margin-bottom: 10px;
-    height: 30px;
     background-color: #4285F4;
     border: 0;
     border-radius: 2.5px;
+    height: 45px;
+    padding: 5px;
+    box-shadow: 3px 3px 5px #888888;
 }
+
+.directionsButton:hover,
+#emailButton:hover
+{ 
+    background-color: #6299f5;
+}
+
 #subContent button:hover
 {
     background-color: #5491F5;
@@ -142,9 +159,10 @@
 
 #logoImage
 {
-    height: 45px;
-    width: 40px;
+    height: 50px;
+    width: 50px;
     margin-right: 10px;
+    margin-top: 4px;
 }
 
 #title
@@ -168,7 +186,7 @@
     background-color: #333;
     overflow: auto;
     white-space: nowrap;
-    height: 280px;
+    height: 320px;
     box-shadow: 5px 10px 8px #888888;
 }
 
@@ -197,7 +215,7 @@
 .menuText
 { 
     position: absolute;
-    top: 50%;
+    top: 36%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -209,6 +227,7 @@
     font-size: 20px;
     text-decoration: none;
 }
+
 .mainContentSlider
 {
     display: inline-block;
@@ -383,7 +402,7 @@ h4
 #biking
 {
 
-    
+
     width: 30px;
 }
 
@@ -391,4 +410,97 @@ h4
 {
     width: 100%;
     text-align: center;
+}
+
+section.spacer.bg3
+{
+    background: url(../images/mount-fuji.jpg) 50% 0 no-repeat fixed;
+}
+
+#japanHeading
+{
+    font-size: 1.6em;
+    text-align: center;
+}
+
+hr
+{
+    border-top: 0.5px solid #000;
+    border-bottom: 0.5px solid #000;
+}
+
+h5
+{
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+#tips
+{
+    max-height: 400px;
+    max-width: 100%;
+    overflow: scroll;
+}
+
+h6
+{
+    font-weight: 400;
+}
+
+.audioColumn 
+{
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: 150px; 
+}
+
+.audioRow:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.menuContent
+{
+    width: 350px;
+    color: white;
+    overflow: auto;
+    
+}
+
+.menuContent p
+{
+    max-width: 100%;
+    max-height: 80px;
+    white-space: normal;
+    padding: 14px;
+    padding-top: 0;
+}
+
+.gm-style-iw
+{
+    width: 260px !important;
+    max-height: 240px !important;
+    overflow-y: scroll !important;
+    scrollbar-width: none !important;
+}
+
+.gm-style-iw .directionsButton
+{
+    height: 50px;
+}
+
+#emailButton
+{
+    margin-top: 10px;
+    width: 15%;
+    margin-left: 42.5%;
+    margin-right: 42.5%;
+    margin-bottom: 10px;
+    background-color: #4285F4;
+    border-radius: 2.5px;
+    border: 0;
+    height: 30px;
+    box-shadow: 2px 3px 6px #4a4a4a;
 }

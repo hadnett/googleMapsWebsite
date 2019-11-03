@@ -1,5 +1,6 @@
 let directionsService = null;
-let directionsDisplay = null; 
+let directionsDisplay = null;
+let currentLocation;
 function init()
 {
 
@@ -16,11 +17,11 @@ function init()
     autocomplete = new google.maps.places.Autocomplete(start, options);
     let end = document.getElementById('end');
     autocomplete = new google.maps.places.Autocomplete(end, options);
-    
+
     directionsService = new google.maps.DirectionsService();
 
     directionsDisplay = new google.maps.DirectionsRenderer();
-    
+
     directionsDisplay.setPanel(document.getElementById('directions'));
 }
 
@@ -33,11 +34,11 @@ function calculateRoute()
 
     start = document.getElementById('start').value;
     end = document.getElementById('end').value;
-    
+
     let request = {origin: start,
         destination: end,
         travelMode: google.maps.TravelMode[travelMode]};
-    
+
     directionsDisplay.setMap(map);
 
     directionsService.route(request, function (response, status)
@@ -48,8 +49,6 @@ function calculateRoute()
         }
     });
 }
-
-let currentLocation;
 
 function getCurrentLocation()
 {
@@ -76,21 +75,22 @@ function getCurrentLocation()
         infoWindow.open(map);
     }
 
+    document.getElementById('start').value = currentLocation.lat + ',' + currentLocation.lng;
+    console.log(currentLocation);
     return currentLocation;
 }
 
 function calculateRouteCurrent(lat, long)
 {
+
+
     let start = getCurrentLocation();
-    
+
     let endPos =
             {
                 lat: lat,
                 lng: long
             };
-
-    console.log(start);
-    console.log(endPos);
 
     let request = {origin: start,
         destination: endPos,
@@ -106,11 +106,16 @@ function calculateRouteCurrent(lat, long)
         }
     });
 
+    document.getElementById('end').value = endPos.lat + ',' + endPos.lng;
     directionsDisplay.setPanel(document.getElementById('directions'));
+
 }
 
 function resetRoute()
-{   
+{
     displayMap();
     document.getElementById('directions').innerHTML = "";
+    document.getElementById('start').value = "";
+    document.getElementById('end').value = "";
+
 }
