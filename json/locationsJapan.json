@@ -214,5 +214,14 @@
         "longitude": "131.657451",
         "icon": "performance.png",
         "type": "Stadium"
-    } 
+    },
+    {
+        "name": "Aviva Stadium",
+        "photo": "images/avivaStadium.jpg",
+        "content": "This stadium is for testing my geolocation function only and for demo purposes during my interview as my current position isn't in Japan and a route using my current position cannot be calculated over such a distance as noted by Google in their API docs.",
+        "latitude": "53.335152",
+        "longitude": "-6.228411",
+        "icon": "performance.png",
+        "type": "Stadium"
+    }
 ]

@@ -16,6 +16,7 @@ let LONGITUDE;
 let map;
 let infobox;
 let location_marker;
+let mapWindow;
 
 async function displayMap()
 {
@@ -58,7 +59,7 @@ async function displayMap()
         createMap();
 
         infobox = [];
-        let nearbyServicesMarkers = [];
+
         let location_content_string;
         for (i = 0; i < locations.length; i++)
         {
@@ -67,16 +68,15 @@ async function displayMap()
                 scaledSize: new google.maps.Size(35, 35)
             };
 
-            location_content_string = '<div id="mainContent"><h1>' + locations[i][NAME] + '</h1><hr><div id="subContent"><img id="locationImage" src="' + locations[i][PHOTO] + ' "><p>' + locations[i][CONTENT] + '</p></div></div>';
-
+            location_content_string = '<div id="mainContent"><h1>' + locations[i][NAME] + '</h1><hr><div id="subContent"><img id="locationImage" src="' + locations[i][PHOTO] + ' "><p>' + locations[i][CONTENT] + '</p><button onclick="calculateRouteCurrent(' + locations[i][LATITUDE] + ',' + locations[i][LONGITUDE] + ')">Get Directions</button></div></div>';
             if (locations[i][TYPE] === "City")
             {
                 document.getElementById("scrollMenu").innerHTML += '<div class="mainContentSlider" onclick="panToCity(' + i + ')"><div class="menuImages"><img src="' + locations[i][PHOTO] + '"></div><div class="menuText"><a>' + locations[i][NAME] + '</a></div></div>';
             }
             ;
 
-            let location_marker;
-            let mapWindow = new google.maps.InfoWindow();
+            location_marker;
+            mapWindow = new google.maps.InfoWindow();
 
             location_marker = new google.maps.Marker(
                     {
@@ -107,83 +107,110 @@ async function displayMap()
                 map.panTo({lat: locations[this.zIndex][LATITUDE], lng: locations[this.zIndex][LONGITUDE]});
             });
 
-            for (let i = 0; i < locations.length; i++)
+
+            google.maps.event.addListener(location_marker, 'click', (function (location_marker, i)
             {
 
-                google.maps.event.addListener(location_marker, 'click', (function (location_marker, i)
+                return function ()
                 {
-                    return function ()
-                    {
 
-                        let services_centre_location = location_marker.position;
-                        mapWindow.close();
-                        let service = new google.maps.places.PlacesService(map);
-                        service.nearbySearch(
-                                {
-                                    location: services_centre_location,
-                                    radius: 1000,
-                                    type: [getType()]
-                                }, getNearbyServicesMarkers);
-                    }
-                })(location_marker, i));
-            }
-
-
-
-            function getNearbyServicesMarkers(results, status)
-            {
-                if (status === google.maps.places.PlacesServiceStatus.OK)
-                {
-                    if (nearbyServicesMarkers.length > 0)
-                    {
-                        for (let i = 0; i < nearbyServicesMarkers.length; i++)
-                        {
-                            nearbyServicesMarkers[i].setVisible(false);
-                        }
-                    }
-                    nearbyServicesMarkers = [];
-
-                    for (let i = 0; i < results.length; i++)
-                    {
-                        createMarker(results[i]);
-                    }
+                    let services_centre_location = location_marker.position;
+                    mapWindow.close();
+                    let service = new google.maps.places.PlacesService(map);
+                    service.nearbySearch(
+                            {
+                                location: services_centre_location,
+                                radius: 1000,
+                                type: [getType()]
+                            }, getNearbyServicesMarkers);
                 }
-            }
-
-            function createMarker(place)
-            {
-                let marker = new google.maps.Marker(
-                        {
-                            map: map,
-                            icon: getIcon(),
-                            position: place.geometry.location
-                        });
-
-                nearbyServicesMarkers.push(marker);
-
-                google.maps.event.addListener(marker, 'click', function ()
-                {
-                    let phoneNumber = place.international_phone_number;
-                    let address = place.formatted_address;
-
-                    if (phoneNumber === undefined)
-                    {
-                        phoneNumber = "Not Listed";
-                    }
-                    if (address === undefined)
-                    {
-                        address = "Not Listed";
-                    }
-
-                    infoBoxClose();
-                    mapWindow.setContent('<strong>' + place.name + '</strong><br><br><div>Address: ' + address + '</div><div>Phone Number: ' + phoneNumber + '</div>');
-                    mapWindow.open(map, this);
-
-                });
-            }
-
+            })(location_marker, i));
 
         }
+
+        let nearbyServicesMarkers = [];
+        function getNearbyServicesMarkers(results, status)
+        {
+            if (status === google.maps.places.PlacesServiceStatus.OK)
+            {
+                if (nearbyServicesMarkers.length > 0)
+                {
+                    for (let i = 0; i < nearbyServicesMarkers.length; i++)
+                    {
+                        nearbyServicesMarkers[i].setVisible(false);
+                    }
+                }
+
+                nearbyServicesMarkers = [];
+                for (let i = 0; i < results.length; i++)
+                {
+                    (function (i)
+                    {
+                        //Set time out function required to resolve over_query_limit
+                        //brought about to overloading Google with requests. 
+                        setTimeout(function () {
+
+                            createMarker(results[i]);
+
+                            let request =
+                                    {
+                                        placeId: results[i].place_id
+                                    };
+                            service = new google.maps.places.PlacesService(map);
+                            service.getDetails(request, createServiceMarkers);
+
+                        }, i < 9 ? 0 : 500 * i);
+                    })(i);
+                }
+            }
+        }
+
+        function createServiceMarkers(place, status)
+        {
+            if (status === google.maps.places.PlacesServiceStatus.OK)
+            {
+                createMarker(place);
+            } else
+            {
+                console.log("Status Not Okay " + status);
+            }
+        }
+
+        function createMarker(place)
+        {
+            let marker = new google.maps.Marker(
+                    {
+                        map: map,
+                        position: place.geometry.location,
+                        icon: getIcon()
+                    });
+
+            nearbyServicesMarkers.push(marker);
+
+
+            google.maps.event.addListener(marker, 'click', function ()
+            {
+                let address;
+                address = place.formatted_address;
+                address = address.replace(/,/g, '<br>');
+                let phoneNumber = place.international_phone_number;
+
+                if (address === undefined)
+                {
+                    address = "Not Listed";
+                }
+                if (phoneNumber === undefined)
+                {
+                    phoneNumber = "Not Listed";
+                }
+
+                infoBoxClose();
+                mapWindow.setContent('<div class="serviceName"><strong>' + place.name + '</strong></div><br><div><strong>Address: </strong><br>' + address + '</div><br><div><strong>Phone Number: </strong>' + phoneNumber + '</div>');
+                mapWindow.open(map, this);
+
+            });
+        }
+
     }
 }
 
@@ -220,7 +247,6 @@ function getType()
 function getIcon()
 {
     let icon;
-    console.log();
     if (getType() === 'cafe')
     {
         icon = {
@@ -265,8 +291,7 @@ function getIcon()
             url: 'https://img.icons8.com/dusk/64/000000/policeman-male.png',
             scaledSize: new google.maps.Size(35, 35)
         };
-    }
-    else if (getType() === 'lodging')
+    } else if (getType() === 'lodging')
     {
         icon = {
             url: 'https://img.icons8.com/dusk/64/000000/3-star-hotel.png',

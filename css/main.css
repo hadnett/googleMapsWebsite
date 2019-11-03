@@ -62,7 +62,7 @@
     margin-left: -20px;
     content: '';
     background: #F2F2F2;
-    margin-top: -25px;
+    margin-top: -17px;
     transform: rotate(45deg);
     z-index: -1;
 }
@@ -112,9 +112,10 @@
 
 #subContent button
 { 
-    width: 20%;;
-    margin-left: 40%;
-    margin-right: 40%;
+    width: 30%;;
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-bottom: 10px;
     height: 30px;
     background-color: #4285F4;
     border: 0;
@@ -217,7 +218,8 @@
 
 section.section
 {
-    padding: 50px;
+    padding-top: 20px;
+    padding-bottom: 50px;
 }
 
 section.section h4
@@ -225,7 +227,7 @@ section.section h4
     font-size: 60px;
     font-weight: 600;
     letter-spacing: -1px;
-    margin-top: 0;
+    margin-top: 60px;
 }
 
 h4
@@ -327,13 +329,22 @@ h4
 
 .adp
 {
-    box-shadow: 5px 10px 8px #333;
+    box-shadow: 5px 10px 15px #333;
+}
+
+.adp,
+#directionsHeading
+{
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 #directionsHeading
 {
     color: black;
     font-weight: bold;  
+    text-align: center;
 }
 
 .warnbox-content,
@@ -344,10 +355,40 @@ h4
     color: #d14;
 }
 
-button.car,
-button.walking,
-button.biking
+#car,
+#walking,
+#biking,
+#submitButton,
+#resetButton
+{  
+    margin-left: 3px;
+    margin-right: 0;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 2px 3px 6px #4a4a4a;
+    height: 30px;
+}
+
+#car:hover,
+#walking:hover,
+#biking:hover,
+#submitButton:hover,
+#resetButton:hover
+{  
+    background: #cccccc;
+}
+
+#car,
+#walking,
+#biking
 {
-    height: 100px;
-    width: 100px;
+
+    
+    width: 30px;
+}
+
+.serviceName
+{
+    width: 100%;
+    text-align: center;
 }

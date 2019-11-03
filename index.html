@@ -11,7 +11,7 @@
         <link href="css/style.css" rel="stylesheet">
         <link href="color/default.css" rel="stylesheet">
         <link rel="shortcut icon" href="images/favicon.ico">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://kit.fontawesome.com/0c9387c877.js" crossorigin="anonymous"></script>
         <script src="script/citySlider.js" type="text/javascript"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5EDRY4wkfO1n8s8fCcyhbPpVHclZzgUc&libraries=places"></script>
         <script src="script/createMap.js" type="text/javascript"></script>
@@ -19,6 +19,8 @@
         <script type="text/javascript" src="script/infobox.js"></script>
         <script src="script/calculateRoute.js" type="text/javascript"></script>
         <link href="css/main.css" rel="stylesheet">
+
+        <script src="script/currentLocation.js" type="text/javascript"></script>
 
     </head>
 
@@ -35,11 +37,10 @@
                         <!-- navigation -->
                         <nav class="pull-right nav-collapse collapse">
                             <ul id="menu-main" class="nav">
-                                <li><a title="team" href="#about">Matches</a></li>
-                                <li><a title="services" href="#services">Get Around</a></li>
-                                <li><a title="works" href="#works">Highlights</a></li>
-                                <li><a title="blog" href="#blog">Meet The Team</a></li>
-                                <li><a title="contact" href="#contact">Japan</a></li>
+                                <li><a title="Get Around" href="#about">Get Around</a></li>
+                                <li><a title="The Teams" href="#works">The Teams</a></li>
+                                <li><a title="Japan" href="#blog">Japan</a></li>
+                                <li><a title="contact" href="#contact">Contact Us</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -129,26 +130,25 @@
                         <div id='textArea'>
                             <input id="start" type="text">
                             <!-- Transit not included as it does not work in Japan -->
-                            <button onclick="travelMode= 'DRIVING'; calculateRoute()"><i class="fas fa-car"></i></button>
-                            <!--<button class ="walking" onclick="travelMode= 'WALKING'; calculateRoute()"></button>
-                            <button class ="biking" onclick="travelMode= 'BICYCLING'; calculateRoute()"></button> -->
+                            <button id="car" onclick="travelMode = 'DRIVING'; calculateRoute()"><i class="fas fa-car"></i></button>
+                            <button id="walking" onclick="travelMode = 'WALKING'; calculateRoute()"><i class="fas fa-walking"></i></button>
+                            <button id="biking" onclick="travelMode = 'BICYCLING'; calculateRoute()"><i class="fas fa-biking"></i></button>
                         </div>
                     </div>
                     <div class='filter'>
                         <div id="filterHeadingEnd">End</div>
                         <div id='endSubmit'>
-                        <input id="end" type="text">
-                        <button onclick='calculateRoute()'>Submit</button>
-                        <button onclick="resetRoute()"> Reset </button>
+                            <input id="end" type="text">
+                            <button id="submitButton" onclick='calculateRoute()'>Route</button>
+                            <button id="resetButton" onclick="resetRoute()"> Reset </button>
                         </div>
                     </div>
-                    
                 </div>
-              
+
                 <div id="mapDiv"></div>
                 <br>
                 <details><summary id="directionsHeading">Route Directions</summary>
-                <div id="directions"></div>
+                    <div id="directions"></div>
                 </details>
             </div>
         </section>
@@ -156,51 +156,23 @@
         <!-- section: works -->
         <section id="works" class="section">
             <div class="container clearfix">
-                <h4>Highlights</h4>
+                <h4>The Teams</h4>
                 <!-- portfolio filter -->
-                <div class="row">
-                    <div id="filters" class="span12">
-                        <ul class="clearfix">
-                            <li>
-                                <a href="#" data-filter="*">
-                                    <h5>All</h5>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" data-filter=".web" class="active">
-                                    <h5>Web</h5>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" data-filter=".print">
-                                    <h5>Print</h5>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" data-filter=".design">
-                                    <h5>Design</h5>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" data-filter=".photography">
-                                    <h5>Photography</h5>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- END PORTFOLIO FILTERING -->
-                </div>
+
+
+                <!-- END PORTFOLIO FILTERING -->
                 <div class="row">
                     <div class="span12">
                         <div id="portfolio-wrap">
                             <!-- portfolio item -->
                             <div class="portfolio-item grid print photography">
                                 <div class="portfolio">
-                                    <a href="images/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
-                                        <img src="images/works/1.png" alt="" />
-                                        <div class="portfolio-overlay">
+                                    <a href="images/works/teams/argentina.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+                                        <img src="images/works/flags/argentina.png" alt="" />
+                                        <div class="portfolio-overlay">                                  
                                             <div class="thumb-info">
-                                                <h5>Portfolio name</h5>
+                                                <h5>Argentina</h5>    
+                                                <i class="fas fa-users icon-2x"></i>
                                             </div>
                                         </div>
                                     </a>
@@ -210,12 +182,12 @@
                             <!-- portfolio item -->
                             <div class="portfolio-item grid print design web">
                                 <div class="portfolio">
-                                    <a href="images/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
-                                        <img src="images/works/2.png" alt="" />
+                                    <a href="images/works/teams/australia.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+                                        <img src="images/works/flags/australia.png" alt="" />
                                         <div class="portfolio-overlay">
                                             <div class="thumb-info">
-                                                <h5>Portfolio name</h5>
-                                                <i class="icon-plus icon-2x"></i>
+                                                <h5>Australia</h5>
+                                                <i class="fas fa-users icon-2x"></i>
                                             </div>
                                         </div>
                                     </a>
@@ -225,12 +197,12 @@
                             <!-- portfolio item -->
                             <div class="portfolio-item grid print design">
                                 <div class="portfolio">
-                                    <a href="images/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
-                                        <img src="images/works/3.png" alt="" />
+                                    <a href="images/works/teams/canada.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+                                        <img src="images/works/flags/canada.png" alt="" />
                                         <div class="portfolio-overlay">
                                             <div class="thumb-info">
-                                                <h5>Portfolio name</h5>
-                                                <i class="icon-plus icon-2x"></i>
+                                                <h5>Canada</h5>
+                                                <i class="fas fa-users icon-2x"></i>
                                             </div>
                                         </div>
                                     </a>
@@ -240,12 +212,12 @@
                             <!-- portfolio item -->
                             <div class="portfolio-item grid photography web">
                                 <div class="portfolio">
-                                    <a href="images/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
-                                        <img src="images/works/4.png" alt="" />
+                                    <a href="images/works/teams/england.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+                                        <img src="images/works/flags/england.png" alt="" />
                                         <div class="portfolio-overlay">
                                             <div class="thumb-info">
-                                                <h5>Portfolio name</h5>
-                                                <i class="icon-plus icon-2x"></i>
+                                                <h5>England</h5>
+                                                <i class="fas fa-users icon-2x"></i>
                                             </div>
                                         </div>
                                     </a>
@@ -255,12 +227,12 @@
                             <!-- portfolio item -->
                             <div class="portfolio-item grid photography web">
                                 <div class="portfolio">
-                                    <a href="images/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
-                                        <img src="images/works/5.png" alt="" />
+                                    <a href="images/works/teams/fiji.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+                                        <img src="images/works/flags/fiji.png" alt="" />
                                         <div class="portfolio-overlay">
                                             <div class="thumb-info">
-                                                <h5>Portfolio name</h5>
-                                                <i class="icon-plus icon-2x"></i>
+                                                <h5>Fiji</h5>
+                                                <i class="fas fa-users icon-2x"></i>
                                             </div>
                                         </div>
                                     </a>
@@ -270,12 +242,12 @@
                             <!-- portfolio item -->
                             <div class="portfolio-item grid photography web">
                                 <div class="portfolio">
-                                    <a href="images/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
-                                        <img src="images/works/6.png" alt="" />
+                                    <a href="images/works/teams/france.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+                                        <img src="images/works/flags/france.png" alt="" />
                                         <div class="portfolio-overlay">
                                             <div class="thumb-info">
-                                                <h5>Portfolio name</h5>
-                                                <i class="icon-plus icon-2x"></i>
+                                                <h5>France</h5>
+                                                <i class="fas fa-users icon-2x"></i>
                                             </div>
                                         </div>
                                     </a>
@@ -285,12 +257,12 @@
                             <!-- portfolio item -->
                             <div class="portfolio-item grid photography web">
                                 <div class="portfolio">
-                                    <a href="images/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
-                                        <img src="images/works/7.png" alt="" />
+                                    <a href="images/works/teams/georgia.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+                                        <img src="images/works/flags/georgia.png" alt="" />
                                         <div class="portfolio-overlay">
                                             <div class="thumb-info">
-                                                <h5>Portfolio name</h5>
-                                                <i class="icon-plus icon-2x"></i>
+                                                <h5>Georgia</h5>
+                                                <i class="fas fa-users icon-2x"></i>
                                             </div>
                                         </div>
                                     </a>
@@ -300,12 +272,12 @@
                             <!-- portfolio item -->
                             <div class="portfolio-item grid photography">
                                 <div class="portfolio">
-                                    <a href="images/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
-                                        <img src="images/works/8.png" alt="" />
+                                    <a href="images/works/teams/ireland.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+                                        <img src="images/works/flags/ireland.png" alt="" />
                                         <div class="portfolio-overlay">
                                             <div class="thumb-info">
-                                                <h5>Portfolio name</h5>
-                                                <i class="icon-plus icon-2x"></i>
+                                                <h5>Ireland</h5>
+                                                <i class="fas fa-users icon-2x"></i>
                                             </div>
                                         </div>
                                     </a>
@@ -315,12 +287,12 @@
                             <!-- portfolio item -->
                             <div class="portfolio-item grid photography web">
                                 <div class="portfolio">
-                                    <a href="images/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
-                                        <img src="images/works/9.png" alt="" />
+                                    <a href="images/works/teams/italy.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+                                        <img src="images/works/flags/italy.png" alt="" />
                                         <div class="portfolio-overlay">
                                             <div class="thumb-info">
-                                                <h5>Portfolio name</h5>
-                                                <i class="icon-plus icon-2x"></i>
+                                                <h5>Italy</h5>
+                                                <i class="fas fa-users icon-2x"></i>
                                             </div>
                                         </div>
                                     </a>
@@ -330,18 +302,148 @@
                             <!-- portfolio item -->
                             <div class="portfolio-item grid design web">
                                 <div class="portfolio">
-                                    <a href="images/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
-                                        <img src="images/works/10.png" alt="" />
+                                    <a href="images/works/teams/japan.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+                                        <img src="images/works/flags/japan.png" alt="" />
                                         <div class="portfolio-overlay">
                                             <div class="thumb-info">
-                                                <h5>Portfolio name</h5>
-                                                <i class="icon-plus icon-2x"></i>
+                                                <h5>Japan</h5>
+                                                <i class="fas fa-users icon-2x"></i>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                             </div>
                             <!-- end portfolio item -->
+                            <div class="portfolio-item grid design web">
+                                <div class="portfolio">
+                                    <a href="images/works/teams/namibia.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+                                        <img src="images/works/flags/namibia.png" alt="" />
+                                        <div class="portfolio-overlay">
+                                            <div class="thumb-info">
+                                                <h5>Namibia</h5>
+                                                <i class="fas fa-users icon-2x"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portfolio-item grid design web">
+                                <div class="portfolio">
+                                    <a href="images/works/teams/new-zealand.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+                                        <img src="images/works/flags/new-zealand.png" alt="" />
+                                        <div class="portfolio-overlay">
+                                            <div class="thumb-info">
+                                                <h5>New Zealand</h5>
+                                                <i class="fas fa-users icon-2x"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portfolio-item grid design web">
+                                <div class="portfolio">
+                                    <a href="images/works/teams/russia.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+                                        <img src="images/works/flags/russia.png" alt="" />
+                                        <div class="portfolio-overlay">
+                                            <div class="thumb-info">
+                                                <h5>Russia</h5>
+                                                <i class="fas fa-users icon-2x"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portfolio-item grid design web">
+                                <div class="portfolio">
+                                    <a href="images/works/teams/samoa.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+                                        <img src="images/works/flags/samoa.png" alt="" />
+                                        <div class="portfolio-overlay">
+                                            <div class="thumb-info">
+                                                <h5>Samoa</h5>
+                                                <i class="fas fa-users icon-2x"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portfolio-item grid design web">
+                                <div class="portfolio">
+                                    <a href="images/works/teams/scotland.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+                                        <img src="images/works/flags/scotland.png" alt="" />
+                                        <div class="portfolio-overlay">
+                                            <div class="thumb-info">
+                                                <h5>Scotland</h5>
+                                                <i class="fas fa-users icon-2x"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portfolio-item grid design web">
+                                <div class="portfolio">
+                                    <a href="images/works/teams/south-africa.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+                                        <img src="images/works/flags/south-africa.png" alt="" />
+                                        <div class="portfolio-overlay">
+                                            <div class="thumb-info">
+                                                <h5>South Africa</h5>
+                                                <i class="fas fa-users icon-2x"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portfolio-item grid design web">
+                                <div class="portfolio">
+                                    <a href="images/works/teams/tonga.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+                                        <img src="images/works/flags/tonga.png" alt="" />
+                                        <div class="portfolio-overlay">
+                                            <div class="thumb-info">
+                                                <h5>Tonga</h5>
+                                                <i class="fas fa-users icon-2x"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portfolio-item grid design web">
+                                <div class="portfolio">
+                                    <a href="images/works/teams/uruguay.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+                                        <img src="images/works/flags/uruguay.png" alt="" />
+                                        <div class="portfolio-overlay">
+                                            <div class="thumb-info">
+                                                <h5>Uruguay</h5>
+                                                <i class="fas fa-users icon-2x"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portfolio-item grid design web">
+                                <div class="portfolio">
+                                    <a href="images/works/teams/united-states.png" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+                                        <img src="images/works/flags/united-states.png" alt="" />
+                                        <div class="portfolio-overlay">
+                                            <div class="thumb-info">
+                                                <h5>USA</h5>
+                                               <i class="fas fa-users icon-2x"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portfolio-item grid design web">
+                                <div class="portfolio">
+                                    <a href="images/works/teams/wales.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+                                        <img src="images/works/flags/wales.png" alt="" />
+                                        <div class="portfolio-overlay">
+                                            <div class="thumb-info">
+                                                <h5>Wales</h5>
+                                               <i class="fas fa-users icon-2x"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
